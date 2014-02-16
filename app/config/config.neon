@@ -1,0 +1,51 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+
+	gettextTranslator:
+		lang: en
+		files:
+			front: %appDir%/lang # for module Front and other non-specified modules
+		# optional with defaults
+		layout: horizontal # or: vertical
+		height: 450
+
+	parameters:
+
+	php:
+		date.timezone: Europe/Prague
+		# zlib.output_compression: yes
+
+	nette:
+		application:
+			errorPresenter: Error
+
+		database:
+			dsn: 'mysql:host=localhost;dbname=test1'
+			user: 'nette1'
+			password: 'heslo'
+			options: [PDO::MYSQL_ATTR_COMPRESS = true]
+			debugger: false # panel v Debugger baru
+			explain: false  # explain dotazů v Debugger baru
+			reflection: discovered # nebo conventional nebo název třídy
+
+		session:
+			expiration: 14 days
+
+	services:
+		routerFactory: RouterFactory
+		router: @routerFactory::createRouter
+		connection:
+			class: Nette\Database\Connection
+			arguments: ['mysql:host=localhost;dbname=test1','nette1','heslo']
+
+	factories:
+
+
+production < common:
+
+development < common:

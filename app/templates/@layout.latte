@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+        <title>{block title|striptags|upper}AS{/block}</title>
+        <link href="{$basePath}/favicon.ico">
+        <link href="{$basePath}/screen.ico" type="text/css">
+        {block head}{/block}
+    </head>
+
+    <body>
+        {form langForm}
+        {input language}
+        {/form}
+        {include #content}
+
+        {block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/jquery.nette.js"></script>
+        {/block}
+    </body>
+</html>
