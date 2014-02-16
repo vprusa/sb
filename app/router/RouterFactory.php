@@ -1,8 +1,7 @@
 <?php
 
 use Nette\Application\Routers\RouteList,
-	Nette\Application\Routers\Route,
-	Nette\Application\Routers\SimpleRouter;
+	Nette\Application\Routers\Route;
 
 
 /**

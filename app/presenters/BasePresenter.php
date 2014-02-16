@@ -20,6 +20,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->translator = $translator;
     }
 
+    /**
+     * 
+     * @param type $class
+     * @return template
+     */
     public function createTemplate($class = NULL) {
         $template = parent::createTemplate($class);
         if (!isset($this->lang)) {
@@ -31,6 +36,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $template;
     }
     
+    /**
+     * 
+     * @return \Nette\Application\UI\Form
+     */
     public function createComponentLangForm() {
         $form = new Form; //;Nette\Forms\Form;
         $form->setMethod('get');
@@ -48,6 +57,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $form;
     }
 
+    /**
+     * 
+     * @param \Nette\Application\UI\Form $form
+     */
     public function processChangeLang(Form $form) {
         $values = $form->getValues();
         $this->lang = $values->language;
