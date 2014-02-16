@@ -23,7 +23,6 @@ class HomepagePresenter extends BasePresenter {
      * @param type $id
      */
     public function actionDefault($id) {
-        
     }
 
     /**
