@@ -17,7 +17,7 @@ class Autor extends Nette\Object {
      * 
      * @param Nette\Database\Connection $connection
      */
-    public function __constructor(Nette\Database\Connection $connection) {
+    public function __construct(Nette\Database\Connection $connection) {
         $this->db = $connection;
     }
 
