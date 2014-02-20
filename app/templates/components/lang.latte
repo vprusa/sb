@@ -1,0 +1,7 @@
+{block lang}
+<div class='language-out' n:inner-foreach='$langs as $langName => $langValue'> 
+    {if $langName !== $lang}
+    <a n:href="changeLang! $langName" class="language-in">{$langValue}</a>
+    {/if}
+</div>
+{/block}

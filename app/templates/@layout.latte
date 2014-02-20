@@ -6,14 +6,12 @@
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <title>{block title|striptags|upper}AS{/block}</title>
         <link href="{$basePath}/favicon.ico">
-        <link href="{$basePath}/screen.ico" type="text/css">
+        <link rel="stylesheet" href="{$basePath}/css/screen.css" type="text/css">
         {block head}{/block}
     </head>
 
     <body>
-        {form langForm}
-        {input language}
-        {/form}
+        {include 'components/lang.latte'}
         {include #content}
 
         {block scripts}

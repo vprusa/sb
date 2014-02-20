@@ -7,11 +7,14 @@ use Nette\Application\UI\Form;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
-     /** @persistent */
+    /** @persistent */
     public $lang;
 
     /** @var GettextTranslator\Gettext */
     protected $translator;
+
+    /**  @var array */
+    protected $langs = ['cs' => 'CZ', 'en' => 'EN'];
 
     /**
      * @param GettextTranslator\Gettext
@@ -27,6 +30,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      */
     public function createTemplate($class = NULL) {
         $template = parent::createTemplate($class);
+        $template->lang = $this->lang;
+        $template->langs = $this->langs;
         if (!isset($this->lang)) {
             $this->lang = $this->translator->getLang();
         } else {
@@ -35,36 +40,28 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $template->setTranslator($this->translator);
         return $template;
     }
-    
-    /**
-     * 
-     * @return \Nette\Application\UI\Form
-     */
-    public function createComponentLangForm() {
-        $form = new Form; //;Nette\Forms\Form;
-        $form->setMethod('get');
-        $form->setAction('this');
-        $form->getElementPrototype()->id('frm-langForm')->class('language');
-        $renderer = $form->getRenderer();
-        $renderer->wrappers['controls']['container'] = NULL;
-        $renderer->wrappers['pair']['container'] = NULL;
-        $renderer->wrappers['label']['container'] = NULL;
-        $renderer->wrappers['control']['container'] = NULL;
-
-        $form->addSelect('language', 'Jazyk', array("en" => "EN", "cs" => "CZ"), 1)->setValue($this->lang)
-                ->setAttribute('onchange', 'this.form.submit()');
-        $form->onSuccess[] = callback($this, 'processChangeLang');
-        return $form;
-    }
 
     /**
      * 
      * @param \Nette\Application\UI\Form $form
      */
-    public function processChangeLang(Form $form) {
-        $values = $form->getValues();
-        $this->lang = $values->language;
+    public function handleChangeLang($lang) {
+        $this->lang = $lang;
         $this->redirect('this');
     }
-    
+
+    /**
+     * 
+     * @param  $template
+     */
+    public function templatePrepareFilters($template) {
+        $latte = new Nette\Latte\Engine;
+        $set = new Nette\Latte\Macros\MacroSet($latte->compiler);
+        $set->addMacro(
+                'style', 'echo "<style>";', 'echo "</style>";'
+        );
+
+        $template->registerFilter($latte);
+    }
+
 }
