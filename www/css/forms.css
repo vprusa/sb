@@ -1,0 +1,13 @@
+.form-error-message{
+    color: red;
+    float: left;
+    text-align: left;
+}
+
+table tr td input{
+    float: left;
+}
+
+table {
+    text-align: left;
+}

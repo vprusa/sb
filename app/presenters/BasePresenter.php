@@ -16,6 +16,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /**  @var array */
     protected $langs = ['cs' => 'CZ', 'en' => 'EN'];
 
+    /** @var Nette\Database\Connection */
+    protected $db;
+
+    public function __construct(\Nette\DI\Container $context = NULL) {
+        parent::__construct($context);
+        $this->db = $this->context->connection;
+    }
+
     /**
      * @param GettextTranslator\Gettext
      */
@@ -60,7 +68,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $set->addMacro(
                 'style', 'echo "<style>";', 'echo "</style>";'
         );
-
         $template->registerFilter($latte);
     }
 

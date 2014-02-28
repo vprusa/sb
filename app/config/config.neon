@@ -24,14 +24,14 @@ common:
 		application:
 			errorPresenter: Error
 
-		database:
-			dsn: 'mysql:host=localhost;dbname=test1'
-			user: 'nette1'
-			password: 'heslo'
-			options: [PDO::MYSQL_ATTR_COMPRESS = true]
-			debugger: false # panel v Debugger baru
-			explain: false  # explain dotazů v Debugger baru
-			reflection: discovered # nebo conventional nebo název třídy
+		#database:
+		#	dsn: 'mysql:host=localhost;dbname=test1'
+		#	user: 'nette1'
+		#	password: 'heslo'
+		#	options: [PDO::MYSQL_ATTR_COMPRESS = true]
+		#	debugger: false # panel v Debugger baru
+		#	explain: false  # explain dotazů v Debugger baru
+		#	reflection: discovered # nebo conventional nebo název třídy
 
 		session:
 			expiration: 14 days
@@ -41,7 +41,9 @@ common:
 		router: @routerFactory::createRouter
 		connection:
 			class: Nette\Database\Connection
-			arguments: ['mysql:host=localhost;dbname=test1','nette1','heslo']
+			arguments: ['mysql:host=localhost;dbname=login1','nette1','heslo']
+		authenticator: Authenticator
+
 
 	factories:
 

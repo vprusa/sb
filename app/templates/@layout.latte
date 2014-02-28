@@ -5,18 +5,26 @@
         <meta name="description" content="">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <title>{block title|striptags|upper}AS{/block}</title>
-        <link href="{$basePath}/favicon.ico">
-        <link rel="stylesheet" href="{$basePath}/css/screen.css" type="text/css">
+        <link rel="shortcut icon" href="{$basePath}/favicon.png">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/forms.css">
         {block head}{/block}
     </head>
 
     <body>
+        <script> document.documentElement.className += ' js'</script>
+
+        <div n:foreach="$flashes as $flash" class='flashmessage {$flash->type}'>
+            {$flash->message}
+        </div>
+
         {include 'components/lang.latte'}
         {include #content}
 
         {block scripts}
         <script src="{$basePath}/js/jquery.js"></script>
-        <script src="{$basePath}/js/jquery.nette.js"></script>
+        <script src="{$basePath}/js/form.jquery.js"></script>
+        <!--<script src="{$basePath}/js/jquery.nette.js"></script>-->
         {/block}
     </body>
 </html>

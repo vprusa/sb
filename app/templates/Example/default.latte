@@ -1,0 +1,33 @@
+{block content}
+{!_'Hello, <span style="color: red;">world!</span>'}
+{form insertForm}
+{label name/}{input name}
+{label surname/}{input surname}
+{input submit}
+{/form}
+<br>
+<ul n:inner-foreach="$table as $id => $row">
+    {if $iterator->isFirst()}
+    {foreach $row as $name => $value}
+    {$name}
+    {/foreach}
+    {/if}
+    <li>
+        {$id}
+        <ul n:inner-foreach="$row as $name => $value">
+            {if !$iterator->isFirst()}
+            <li>
+                {$value}
+            </li>
+            {/if}
+        </ul>
+    </li>
+</ul> 
+{/block}
+
+{block scripts}
+{include #parent}
+{/block}
+
+{block head}
+{/block}
